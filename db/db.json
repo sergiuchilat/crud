@@ -1,0 +1,146 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "name": "Amintiri don copilarie",
+      "author": "Ion Creanga"
+    },
+    {
+      "id": 2,
+      "name": "Poezii II",
+      "author": "Mihai Eminescu"
+    },
+    {
+      "id": 23,
+      "name": "Poezii II",
+      "author": "Mihai Eminescu"
+    },
+    {
+      "id": 3,
+      "name": "Carte II",
+      "author": "Alecu Russo"
+    },
+    {
+      "id": 4,
+      "name": "Amintiri don copilarie",
+      "author": "Ion Creanga"
+    },
+    {
+      "id": 5,
+      "name": "Poezii",
+      "author": "Mihai Eminescu"
+    },
+    {
+      "id": 6,
+      "name": "Carte",
+      "author": "Alecu Russo"
+    },
+    {
+      "id": 7,
+      "name": "Amintiri don copilarie",
+      "author": "Ion Creanga"
+    },
+    {
+      "id": 8,
+      "name": "Poezii",
+      "author": "Mihai Eminescu"
+    },
+    {
+      "id": 9,
+      "name": "Carte",
+      "author": "Alecu Russo"
+    }
+  ],
+  "authors": [
+    {
+      "id": 3,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 4,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 5,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 6,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 7,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 8,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 9,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 10,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 11,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 12,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 13,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 14,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 15,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 16,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 17,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    }
+  ]
+}
