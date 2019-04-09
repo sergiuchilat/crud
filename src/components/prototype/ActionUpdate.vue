@@ -30,20 +30,19 @@ export default {
   },
   methods: {
     initAction (params) {
-      params.moduleName && params.id && this.loadData(params);
-      //(params.breadcrumb) && this.loadBreadcrumbs()
+      params.moduleName && params.id && this.loadData(params)
+      // (params.breadcrumb) && this.loadBreadcrumbs()
     },
     loadData (params) {
-
       this.$store.dispatch('fetchItem', params)
-              .then(() => {
-              })
-              .catch(() => {
-                this.resultStatus = {
-                  label: 'E:SERVER_ERROR',
-                  class: 'danger'
-                }
-              })
+        .then(() => {
+        })
+        .catch(() => {
+          this.resultStatus = {
+            label: 'E:SERVER_ERROR',
+            class: 'danger'
+          }
+        })
     },
     Return () {
       this.$router.push(`/${this.moduleName}/list`)
@@ -73,7 +72,6 @@ export default {
 
 <template>
   <div>
-    TEST
     <v-layout justify-center>
       <v-flex xs3>
         <v-flex v-for="(value, key) in updatedItem">

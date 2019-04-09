@@ -16,7 +16,7 @@ let store = new Vuex.Store({
     actionUpdate
   },
   state: {
-  
+
   },
   actions: {
     addItems (context, payload) {
@@ -58,18 +58,18 @@ let store = new Vuex.Store({
       setTimeout(function () {
         store.state.pageLoading = !store.state.dataLoaded
       }, 100)
-      context.commit('setData', { 'data': []})
+      context.commit('setData', { 'data': [] })
       axios.get(API + module)
         .then(response => {
           const data = response.data
           store.state.dataLoaded = true
           store.state.pageLoading = false
-          context.commit('setData', { 'data': data})
+          context.commit('setData', { 'data': data })
         }).catch(err => {
           console.log('Load error' + err)
           store.state.dataLoaded = true
           store.state.pageLoading = false
-          context.commit('setData', { 'data': []})
+          context.commit('setData', { 'data': [] })
         })
     }
   }
