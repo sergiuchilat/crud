@@ -1,21 +1,10 @@
 
 <script>
-import AlertMessage from '@/components/widgets/AlertMessage'
 import Action from './Action'
+
 export default {
   name: 'ActionUpdate',
   extends: Action,
-  components: {
-    AlertMessage
-  },
-  data () {
-    return {
-      resultStatus: {
-        label: '',
-        class: ''
-      }
-    }
-  },
   computed: {
     updatedItem () {
       return this.$store.getters.getActionData[0]
@@ -38,32 +27,33 @@ export default {
         .then(() => {
         })
         .catch(() => {
-          this.resultStatus = {
-            label: 'E:SERVER_ERROR',
-            class: 'danger'
-          }
+          this.$store.dispatch('setAlertStatus', {
+            label: 'errors.server',
+            class: 'error'
+          })
         })
     },
     Return () {
       this.$router.push(`/${this.moduleName}/list`)
     },
     Save () {
+      console.log(this.moduleName)
       this.$store.dispatch('updateItems', {
         data: this.updatedItem,
-        dataURL: this.moduleName
+        moduleName: this.moduleName
       })
         .then(() => {
-          this.resultStatus = {
+          this.$store.dispatch('setAlertStatus', {
             label: 'success.saved',
             class: 'success'
-          }
+          })
           this.Return()
         })
         .catch(() => {
-          this.resultStatus = {
+          this.$store.dispatch('setAlertStatus', {
             label: 'errors.server',
             class: 'error'
-          }
+          })
         })
     }
   }
@@ -85,7 +75,6 @@ export default {
         </v-layout>
       </v-flex>
     </v-layout>
-    <AlertMessage :resultStatus="resultStatus"></AlertMessage>
   </div>
 </template>
 

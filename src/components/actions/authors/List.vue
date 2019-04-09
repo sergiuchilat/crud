@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DataTable :items="items" :dataURL = "dataURL"></DataTable>
+    <DataTable :items="items" :moduleName = "moduleName"></DataTable>
   </div>
 </template>
 
@@ -8,12 +8,7 @@
 import PrototypeAction from '@/components/prototype/ActionList'
 export default {
   name: 'List',
-  extends: PrototypeAction,
-  data () {
-    return {
-      dataURL: 'authors'
-    }
-  }
+  extends: PrototypeAction
 }
 </script>
 

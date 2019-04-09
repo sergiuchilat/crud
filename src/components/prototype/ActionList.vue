@@ -13,18 +13,18 @@ export default {
   },
   methods: {
     initAction (params) {
-      (params.dataURL) && this.loadData(params.dataURL);
+      (params.moduleName) && this.loadData(params.moduleName);
       (params.breadcrumb) && this.loadBreadcrumbs()
     },
-    loadData (dataURL) {
-      this.$store.dispatch('fetchData', dataURL)
+    loadData (moduleName) {
+      this.$store.dispatch('fetchData', moduleName)
         .then(() => {
         })
         .catch(() => {
-          this.resultStatus = {
-            label: 'E:SERVER_ERROR',
-            class: 'danger'
-          }
+          this.$store.dispatch('setAlertStatus', {
+            label: 'errors.server',
+            class: 'error'
+          })
         })
     }
   },
@@ -36,7 +36,7 @@ export default {
   },
   mounted () {
     this.initAction({
-      dataURL: this.dataURL,
+      moduleName: this.moduleName,
       breadcrumb: true
     })
   }

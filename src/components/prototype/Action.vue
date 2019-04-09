@@ -17,10 +17,6 @@ export default {
   },
   data () {
     return {
-      resultStatus: {
-        label: '',
-        class: ''
-      },
       breadcrumb: [
         {
           text: this.$t('homeLinkText'),

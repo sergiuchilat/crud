@@ -3,7 +3,7 @@ import ActionDelete from '@/components/prototype/ActionDelete'
 
 export default {
   name: 'DataTable',
-  props: ['items', 'dataURL'],
+  props: ['items', 'moduleName'],
   components: {
     ActionDelete
   },
@@ -35,7 +35,7 @@ export default {
       }
     },
     'pagination.page' () {
-      this.$router.push(`/${this.dataURL}/${this.$route.params.action}/page/${this.pagination.page}`)
+      this.$router.push(`/${this.moduleName}/${this.$route.params.action}/page/${this.pagination.page}`)
     },
     currentRoute () {
       this.pagination.page = +this.currentRoute
@@ -82,11 +82,11 @@ export default {
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark class="mb-2" :to="`/${dataURL}/create`">New Item</v-btn>
+          <v-btn color="primary" dark class="mb-2" :to="`/${moduleName}/create`">New Item</v-btn>
         </template>
        <ActionDelete
                :deletedItem = "deletedItem"
-               :dataURL = "dataURL"
+               :moduleName = "moduleName"
                :closeModal = "close"
        />
       </v-dialog>
@@ -104,7 +104,7 @@ export default {
           <v-icon
                   small
                   class="mr-2"
-                  @click="$router.push(`/authors/update/id/${props.item.id}`)"
+                  @click="$router.push(`/${moduleName}/update/id/${props.item.id}`)"
           >
             edit
           </v-icon>

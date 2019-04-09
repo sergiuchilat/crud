@@ -24,18 +24,14 @@
 <script>
 export default {
   name: 'AlertMessage',
-  props: {
-    label: {
-      type: String
-    },
-    alertClass: {
-      type: String
-    },
-    resultStatus: Object
-  },
   data () {
     return {
       showAlert: false
+    }
+  },
+  computed: {
+    resultStatus () {
+      return this.$store.getters.getAlertStatus
     }
   },
   watch: {

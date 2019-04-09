@@ -13,29 +13,29 @@ export default {
   },
   methods: {
     initAction (params) {
-      (params.dataURL) && this.loadData(params.dataURL);
+      (params.moduleName) && this.loadData(params.moduleName);
       (params.breadcrumb) && this.loadBreadcrumbs()
     },
-    loadData (dataURL) {
+    loadData (moduleName) {
 
     },
     onSubmit () {
       this.$store.dispatch('addItems', {
         data: this.form,
-        dataURL: this.dataURL
+        moduleName: this.moduleName
       })
         .then(() => {
           this.toggleForm('hide')
-          this.resultStatus = {
+          this.$store.dispatch('setAlertStatus', {
             label: 'success.saved',
             class: 'success'
-          }
+          })
         })
         .catch(() => {
-          this.resultStatus = {
+          this.$store.dispatch('setAlertStatus', {
             label: 'errors.server',
             class: 'error'
-          }
+          })
         })
     },
     toggleForm (status) {
@@ -49,15 +49,11 @@ export default {
       }
       this.$v.$reset()
       this.toggleForm('show')
-      this.resultStatus = {
-        label: '',
-        class: ''
-      }
     }
   },
   mounted () {
     this.initAction({
-      dataURL: this.dataURL,
+      moduleName: this.moduleName,
       breadcrumb: true
     })
   }

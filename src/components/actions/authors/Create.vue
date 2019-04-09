@@ -1,18 +1,14 @@
 <script>
 import { maxLength, minLength, numeric, required } from 'vuelidate/lib/validators'
 import PrototypeAction from '@/components/prototype/ActionCreate'
-import AlertMessage from '@/components/widgets/AlertMessage'
 
 const isPhone = value => value.match('^[0-9 +]*$') !== null
 
 export default {
-  components: {
-    AlertMessage
-  },
   extends: PrototypeAction,
   data () {
     return {
-      dataURL: 'authors',
+      moduleName: 'authors',
       form: {
         name: '',
         age: '',
@@ -105,10 +101,7 @@ export default {
         Submit
       </v-btn>
     </v-flex>
-    <AlertMessage
-      :resultStatus = "resultStatus"
-    />
-    <div class="col-12" v-if="resultStatus.label==='success.saved' && !showForm">
+    <div class="col-12" v-if="!showForm">
       <v-btn
         color="success"
         @click="resetForm"

@@ -1,45 +1,36 @@
 
 <script>
-import AlertMessage from '@/components/widgets/AlertMessage'
+
 export default {
   name: 'ActionDelete',
-  components: { AlertMessage },
-  props: ['deletedItem', 'dataURL', 'closeModal'],
-  data () {
-    return {
-      resultStatus: {
-        label: '',
-        class: ''
-      }
-    }
-  },
+  props: ['deletedItem', 'moduleName', 'closeModal'],
   methods: {
     deleteItem () {
       this.$store.dispatch('deleteItems', {
         data: this.deletedItem.id,
-        dataURL: this.dataURL
+        moduleName: this.moduleName
       })
         .then(() => {
-          this.$store.dispatch('fetchData', this.dataURL)
+          this.$store.dispatch('fetchData', this.moduleName)
             .then(() => {
-              this.resultStatus = {
+              this.$store.dispatch('setAlertStatus', {
                 label: 'success.saved',
                 class: 'success'
-              }
+              })
               this.closeModal()
             })
             .catch(() => {
-              this.resultStatus = {
-                label: 'E:SERVER_ERROR',
+              this.$store.dispatch('setAlertStatus', {
+                label: 'errors.server',
                 class: 'error'
-              }
+              })
             })
         })
         .catch(() => {
-          this.resultStatus = {
+          this.$store.dispatch('setAlertStatus', {
             label: 'errors.server',
             class: 'error'
-          }
+          })
         })
     }
   }
@@ -71,7 +62,6 @@ export default {
             <v-btn color="blue darken-1" flat @click="closeModal">Cancel</v-btn>
             <v-btn color="error" flat @click="deleteItem">Delete</v-btn>
         </v-card-actions>
-        <AlertMessage :resultStatus="resultStatus" />
     </v-card>
 </template>
 
