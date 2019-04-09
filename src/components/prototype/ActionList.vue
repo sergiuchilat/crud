@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     items () {
-      let data = this.$store.getters.getActionData(this.dataURL)
+      let data = this.$store.getters.getActionData
       return data || []
     }
   },

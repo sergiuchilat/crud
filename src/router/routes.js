@@ -7,7 +7,11 @@ export default [
     component: Main
   },
   {
-    path: '/authors/:action/:page',
+    path: '/authors/:action/id/:id',
+    component: resolve => require(['@/components/controllers/AuthorsController'], resolve)
+  },
+  {
+    path: '/authors/:action/page/:page',
     component: resolve => require(['@/components/controllers/AuthorsController'], resolve)
   },
   {
@@ -15,15 +19,11 @@ export default [
     component: resolve => require(['@/components/controllers/AuthorsController'], resolve)
   },
   {
-    path: '/books/:action/:page',
+    path: '/books/:action/page/:page',
     component: resolve => require(['@/components/controllers/BooksController'], resolve)
   },
   {
     path: '/books/:action',
     component: resolve => require(['@/components/controllers/BooksController'], resolve)
-  },
-  {
-    path: '/edit/:items/:id',
-    component: resolve => require(['@/components/prototype/ActionUpdate'], resolve)
   }
 ]

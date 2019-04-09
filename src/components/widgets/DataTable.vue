@@ -35,7 +35,7 @@ export default {
       }
     },
     'pagination.page' () {
-      this.$router.push(`/${this.dataURL}/${this.$route.params.action}/${this.pagination.page}`)
+      this.$router.push(`/${this.dataURL}/${this.$route.params.action}/page/${this.pagination.page}`)
     },
     currentRoute () {
       this.pagination.page = +this.currentRoute
@@ -104,7 +104,7 @@ export default {
           <v-icon
                   small
                   class="mr-2"
-                  @click="$router.push(`/edit/${dataURL}/${props.item.id}`)"
+                  @click="$router.push(`/authors/update/id/${props.item.id}`)"
           >
             edit
           </v-icon>
