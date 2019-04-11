@@ -28,6 +28,9 @@ export default {
 </script>
 
 <style>
+  html {
+    overflow-y: visible;
+  }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     color: #2c3e50;

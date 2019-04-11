@@ -13,7 +13,7 @@ export default {
     pagination: {
       descending: true,
       page: 1,
-      rowsPerPage: 10,
+      rowsPerPage: 15,
       totalItems: 0
     },
     totalVisiblePage: 6,
@@ -105,7 +105,6 @@ export default {
                 :editItem = "editItem.id"
                 :moduleName = "moduleName"
                 :closeModal = "close"
-        />
         />
       </v-dialog>
     </v-toolbar>
