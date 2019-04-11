@@ -1,11 +1,13 @@
 <script>
 import ActionDelete from '@/components/prototype/ActionDelete'
+import ActionUpdate from '@/components/prototype/ActionUpdate'
 
 export default {
   name: 'DataTable',
   props: ['items', 'moduleName'],
   components: {
-    ActionDelete
+    ActionDelete,
+    ActionUpdate
   },
   data: () => ({
     pagination: {
@@ -15,17 +17,19 @@ export default {
       totalItems: 0
     },
     totalVisiblePage: 6,
-    dialog: false,
+    deleteModal: false,
+    editModal: false,
     headers: [{
       text: 'Actions',
       value: 'id',
       align: 'center',
       sortable: false
     }],
-    deletedItem: {}
+    deletedItem: {},
+    editItem: {}
   }),
   watch: {
-    dialog (val) {
+    deleteModal (val) {
       val || this.close()
     },
     items () {
@@ -62,14 +66,20 @@ export default {
         })
       }
     },
+    getElementForUpdate (item) {
+      this.editModal = true
+      this.editItem = item
+    },
     getElementForDelete (item) {
-      this.dialog = true
+      this.deleteModal = true
       this.deletedItem = item
     },
     close () {
-      this.dialog = false
+      this.deleteModal = false
+      this.editModal = false
       setTimeout(() => {
         this.deletedItem = {}
+        this.editItem = {}
       }, 300)
     }
   }
@@ -80,15 +90,23 @@ export default {
   <div>
     <v-toolbar flat color="white">
       <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" max-width="500px">
-        <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark class="mb-2" :to="`/${moduleName}/create`">New Item</v-btn>
-        </template>
+      <v-btn color="primary" dark class="mb-2" :to="`/${moduleName}/create`">New Item</v-btn>
+      <v-dialog v-model="deleteModal" max-width="500px">
        <ActionDelete
+               v-if="deleteModal"
                :deletedItem = "deletedItem"
                :moduleName = "moduleName"
                :closeModal = "close"
        />
+      </v-dialog>
+      <v-dialog v-model="editModal" fullscreen hide-overlay transition="dialog-bottom-transition">
+        <ActionUpdate
+                v-if="editModal"
+                :editItem = "editItem.id"
+                :moduleName = "moduleName"
+                :closeModal = "close"
+        />
+        />
       </v-dialog>
     </v-toolbar>
     <v-data-table
@@ -104,7 +122,7 @@ export default {
           <v-icon
                   small
                   class="mr-2"
-                  @click="$router.push(`/${moduleName}/update/id/${props.item.id}`)"
+                  @click="getElementForUpdate(props.item)"
           >
             edit
           </v-icon>

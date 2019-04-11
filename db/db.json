@@ -7,7 +7,7 @@
     },
     {
       "id": 2,
-      "name": "Poezii II",
+      "name": "Poezii III",
       "author": "Mihai Eminescu"
     },
     {
@@ -53,16 +53,10 @@
   ],
   "authors": [
     {
-      "id": 9,
-      "name": "Ion Creanga",
-      "age": 85,
-      "phone": "+37311111113"
-    },
-    {
       "id": 10,
       "name": "Ion Creanga",
       "age": 85,
-      "phone": "+37311111113"
+      "phone": "+37311111112"
     },
     {
       "id": 11,
@@ -74,19 +68,19 @@
       "id": 12,
       "name": "Ion Creanga",
       "age": 85,
-      "phone": "+37311111113"
+      "phone": "+37311111115"
     },
     {
       "id": 13,
       "name": "Ion Creanga",
       "age": 85,
-      "phone": "+37311111113"
+      "phone": "+37311111117"
     },
     {
       "id": 14,
       "name": "Ion Creanga",
       "age": 85,
-      "phone": "+37311111113"
+      "phone": "+37311111114"
     },
     {
       "id": 15,
@@ -110,13 +104,13 @@
       "id": 19,
       "name": "Ion Creanga",
       "age": 85,
-      "phone": "+37311111113"
+      "phone": "+37311111119"
     },
     {
       "id": 20,
       "name": "Ion Creanga",
       "age": 85,
-      "phone": "+37311111113"
+      "phone": "+37311111117"
     },
     {
       "id": 21,

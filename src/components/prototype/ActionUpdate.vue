@@ -1,19 +1,18 @@
 
 <script>
-import Action from './Action'
 
 export default {
   name: 'ActionUpdate',
-  extends: Action,
+  props: ['editItem', 'moduleName', 'closeModal'],
   computed: {
     updatedItem () {
-      return this.$store.getters.getActionData[0]
+      return this.$store.getters.getUpdatedItem
     }
   },
   mounted () {
     this.initAction({
       moduleName: this.moduleName,
-      id: this.$route.params.id,
+      id: this.editItem,
       breadcrumb: true
     })
   },
@@ -23,7 +22,7 @@ export default {
       // (params.breadcrumb) && this.loadBreadcrumbs()
     },
     loadData (params) {
-      this.$store.dispatch('fetchItem', params)
+      this.$store.dispatch('getItemForUpdate', params)
         .then(() => {
         })
         .catch(() => {
@@ -33,21 +32,22 @@ export default {
           })
         })
     },
-    Return () {
-      this.$router.push(`/${this.moduleName}/list`)
-    },
     Save () {
-      console.log(this.moduleName)
-      this.$store.dispatch('updateItems', {
+      this.$store.dispatch('patchUpdateItems', {
         data: this.updatedItem,
         moduleName: this.moduleName
       })
         .then(() => {
-          this.$store.dispatch('setAlertStatus', {
-            label: 'success.saved',
-            class: 'success'
+          this.$store.dispatch('getUpdatedItem', {
+            data: this.editItem,
+            moduleName: this.moduleName + ''
           })
-          this.Return()
+            .then(
+              this.$store.dispatch('setAlertStatus', {
+                label: 'success.saved',
+                class: 'success'
+              }))
+          this.closeModal()
         })
         .catch(() => {
           this.$store.dispatch('setAlertStatus', {
@@ -61,23 +61,31 @@ export default {
 </script>
 
 <template>
-  <div>
-    <v-layout justify-center>
-      <v-flex xs3>
-        <v-flex v-for="(value, key) in updatedItem">
-          <v-flex v-if="key !== 'id'">
-            <v-text-field v-model="updatedItem[key]" :label="key"></v-text-field>
-          </v-flex>
-        </v-flex >
-        <v-layout row justify-center>
-          <v-btn @click="Save" color = "warning">Save</v-btn>
-          <v-btn @click="Return" color = "error">Return</v-btn>
-        </v-layout>
-      </v-flex>
-    </v-layout>
-  </div>
+    <v-card>
+      <v-toolbar dark color="grey">
+        <v-toolbar-title>Update</v-toolbar-title>
+        <v-spacer>
+        </v-spacer>
+        <v-toolbar-items>
+          <v-btn icon dark @click="closeModal">
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+          <v-layout class="pt-5" justify-center align-center>
+            <v-flex xs3>
+              <v-flex v-for="(value, key) in updatedItem">
+                <v-flex v-if="key !== 'id'">
+                  <v-text-field v-model="updatedItem[key]" :label="key"></v-text-field>
+                </v-flex>
+              </v-flex >
+              <v-layout row justify-center>
+                <v-btn block @click="Save" color = "warning">Save</v-btn>
+              </v-layout>
+            </v-flex>
+          </v-layout>
+    </v-card>
 </template>
 
 <style scoped>
-
 </style>

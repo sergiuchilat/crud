@@ -6,10 +6,7 @@
 export default {
   name: 'Action',
   props: {
-      test: {
-        required: false
-      },
-      moduleName: {
+    moduleName: {
       type: String,
       required: true
     },

@@ -9,18 +9,5 @@ export default {
     ActionAdd,
     ActionUpdate,
     ActionDelete
-  },
-  state: {
-    actionData: []
-  },
-  mutations: {
-    setData (state, object) {
-      state.actionData = object.data
-    }
-  },
-  getters: {
-    getActionData: state => {
-      return state.actionData
-    }
   }
 }

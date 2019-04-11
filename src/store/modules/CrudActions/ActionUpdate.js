@@ -2,17 +2,43 @@ import axios from 'axios'
 import store from '@/store/'
 
 export default {
+  state: {
+    updatedItem: {}
+  },
+  getters: {
+    getUpdatedItem: state => {
+      return state.updatedItem
+    }
+  },
+  mutations: {
+    setUpdatedItem (state, object) {
+      state.updatedItem = object
+    },
+    spliceUpdatedItem (state, object) {
+      let updatedList = store.state.CrudActions.ActionFetch.actionData
+      let updatedIndex = updatedList.findIndex(i => i.id === object.id)
+      updatedList.splice(updatedIndex, 1, object)
+    }
+  },
   actions: {
-    fetchItem (context, payload) {
+    getItemForUpdate (context, payload) {
       axios.get('http://localhost:3000/' + payload.moduleName + '/' + payload.id)
         .then((res) => {
-          context.commit('setData', { 'data': [res.data] })
+          context.commit('setUpdatedItem', res.data)
         })
         .catch((err) => {
-          context.commit('setData', { 'data': [] })
+          context.commit('setUpdatedItem', {})
         })
     },
-    updateItems (context, payload) {
+    getUpdatedItem (context, payload) {
+      axios.get('http://localhost:3000/' + payload.moduleName + '/' + payload.data)
+        .then((res) => {
+          context.commit('spliceUpdatedItem', res.data)
+        })
+        .catch((err) => {
+        })
+    },
+    patchUpdateItems (context, payload) {
       store.dispatch('showLoader')
       return new Promise((resolve, reject) => {
         axios.patch(`http://localhost:3000/${payload.moduleName}/${payload.data.id}`, payload.data)
