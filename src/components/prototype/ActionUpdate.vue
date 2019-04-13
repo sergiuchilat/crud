@@ -38,15 +38,10 @@ export default {
         moduleName: this.moduleName
       })
         .then(() => {
-          this.$store.dispatch('getUpdatedItem', {
-            data: this.editItem,
-            moduleName: this.moduleName + ''
+          this.$store.dispatch('setAlertStatus', {
+            label: 'success.saved',
+            class: 'success'
           })
-            .then(
-              this.$store.dispatch('setAlertStatus', {
-                label: 'success.saved',
-                class: 'success'
-              }))
           this.closeModal()
         })
         .catch(() => {

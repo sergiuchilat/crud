@@ -22,29 +22,43 @@ export default {
   },
   actions: {
     getItemForUpdate (context, payload) {
-      axios.get('http://localhost:3000/' + payload.moduleName + '/' + payload.id)
-        .then((res) => {
-          context.commit('setUpdatedItem', res.data)
-        })
-        .catch((err) => {
-          context.commit('setUpdatedItem', {})
-        })
+      store.dispatch('showLoader')
+      return new Promise((resolve, reject) => {
+        axios.get('http://localhost:3000/' + payload.moduleName + '/' + payload.id)
+          .then((res) => {
+            store.dispatch('hideLoader')
+            context.commit('setUpdatedItem', res.data)
+            resolve(res)
+          })
+          .catch((err) => {
+            store.dispatch('hideLoader')
+            context.commit('setUpdatedItem', {})
+            reject(err)
+          })
+      })
     },
     getUpdatedItem (context, payload) {
-      axios.get('http://localhost:3000/' + payload.moduleName + '/' + payload.data)
-        .then((res) => {
-          context.commit('spliceUpdatedItem', res.data)
-        })
-        .catch((err) => {
-        })
+      return new Promise((resolve, reject) => {
+        axios.get('http://localhost:3000/' + payload.moduleName + '/' + payload.data.id)
+          .then((res) => {
+            context.commit('spliceUpdatedItem', res.data)
+            resolve(res)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
     },
     patchUpdateItems (context, payload) {
       store.dispatch('showLoader')
       return new Promise((resolve, reject) => {
         axios.patch(`http://localhost:3000/${payload.moduleName}/${payload.data.id}`, payload.data)
           .then(res => {
-            store.dispatch('hideLoader')
-            resolve(res)
+            store.dispatch('getUpdatedItem', payload)
+              .then(() => {
+                store.dispatch('hideLoader')
+                resolve(res)
+              })
           })
           .catch(err => {
             store.dispatch('hideLoader')

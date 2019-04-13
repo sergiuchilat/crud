@@ -13,7 +13,7 @@ export default {
     pagination: {
       descending: true,
       page: 1,
-      rowsPerPage: 15,
+      rowsPerPage: 12,
       totalItems: 0
     },
     totalVisiblePage: 6,
@@ -26,7 +26,8 @@ export default {
       sortable: false
     }],
     deletedItem: {},
-    editItem: {}
+    editItem: {},
+    selected: []
   }),
   watch: {
     deleteModal (val) {
@@ -90,11 +91,26 @@ export default {
   <div>
     <v-toolbar flat color="white">
       <v-spacer></v-spacer>
-      <v-btn color="primary" dark class="mb-2" :to="`/${moduleName}/create`">New Item</v-btn>
+     <v-icon
+             large
+             class="mr-3 animation"
+             @click="$router.push(`/${moduleName}/create`)"
+     >
+       add_circle_outline
+     </v-icon>
+      <transition name="slide-fade">
+      <v-icon
+              v-if="selected.length"
+              large
+              @click="getElementForDelete(selected)"
+      >
+        delete_outline
+      </v-icon>
+      </transition>
       <v-dialog v-model="deleteModal" max-width="500px">
        <ActionDelete
                v-if="deleteModal"
-               :deletedItem = "deletedItem"
+               :deletedItems = "deletedItem"
                :moduleName = "moduleName"
                :closeModal = "close"
        />
@@ -109,39 +125,65 @@ export default {
       </v-dialog>
     </v-toolbar>
     <v-data-table
+            v-model="selected"
             :headers="headers"
             :items="items"
-            hide-actions
             :pagination.sync="pagination"
+            select-all
+            hide-actions
             class="elevation-1"
     >
       <template v-slot:items="props">
-        <td v-for="(value) in props.item" class="text-xs-center">{{value}}</td>
-        <td class="justify-center layout px-0 ">
-          <v-icon
-                  small
-                  class="mr-2"
-                  @click="getElementForUpdate(props.item)"
-          >
-            edit
-          </v-icon>
-          <v-icon
-                  small
-                  @click="getElementForDelete(props.item)"
-          >
-            delete
-          </v-icon>
-        </td>
+        <tr :active="props.selected" @click="props.selected = !props.selected">
+            <td>
+                <v-checkbox
+                        v-model="props.selected"
+                        primary
+                        hide-details
+                ></v-checkbox>
+            </td>
+            <td v-for="(value) in props.item" class="text-xs-center">{{value}}</td>
+            <td class="justify-center layout px-0 ">
+                <v-icon
+                        small
+                        class="mr-2"
+                        @click="getElementForUpdate(props.item)"
+                >
+                    edit
+                </v-icon>
+                <v-icon
+                        small
+                        @click="getElementForDelete(props.item)"
+                >
+                    delete
+                </v-icon>
+            </td>
+        </tr>
+      </template>
+        <template v-slot:footer>
+            <td v-if="showPagination" :colspan="headers.length + 1" class="pt-3 pb-3">
+                <v-pagination
+                        :total-visible="totalVisiblePage"
+                        v-model="pagination.page"
+                        :length="pages"
+                >
+                </v-pagination>
+            </td>
+        </tr>
       </template>
     </v-data-table>
-    <div class="text-xs-center pt-4">
-      <v-pagination
-              v-if="showPagination"
-              :total-visible="totalVisiblePage"
-              v-model="pagination.page"
-              :length="pages"
-      >
-      </v-pagination>
-    </div>
   </div>
 </template>
+
+<style scoped>
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+</style>

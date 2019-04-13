@@ -3,35 +3,34 @@
 
 export default {
   name: 'ActionDelete',
-  props: ['deletedItem', 'moduleName', 'closeModal'],
+  props: ['deletedItems', 'moduleName', 'closeModal'],
   methods: {
     deleteItem () {
-      this.$store.dispatch('deleteItems', {
-        data: this.deletedItem.id,
-        moduleName: this.moduleName
-      })
-        .then(() => {
-          this.$store.dispatch('fetchData', this.moduleName)
-            .then(() => {
-              this.$store.dispatch('setAlertStatus', {
-                label: 'success.saved',
-                class: 'success'
-              })
-              this.closeModal()
-            })
-            .catch(() => {
-              this.$store.dispatch('setAlertStatus', {
-                label: 'errors.server',
-                class: 'error'
-              })
-            })
+      let deletedItem
+      if (!this.deletedItems.length) {
+        deletedItem = [this.deletedItems]
+      } else {
+        deletedItem = this.deletedItems
+      }
+      deletedItem.map((value, key) => {
+        this.$store.dispatch('deleteItems', {
+          data: value.id,
+          moduleName: this.moduleName
         })
-        .catch(() => {
-          this.$store.dispatch('setAlertStatus', {
-            label: 'errors.server',
-            class: 'error'
+          .then(() => {
+            this.$store.dispatch('setAlertStatus', {
+              label: 'success.saved',
+              class: 'success'
+            })
+            this.closeModal()
           })
-        })
+          .catch(() => {
+            this.$store.dispatch('setAlertStatus', {
+              label: 'errors.server',
+              class: 'error'
+            })
+          })
+      })
     }
   }
 }
@@ -44,12 +43,17 @@ export default {
         </v-card-title>
         <v-card-text>
             <v-container grid-list-md>
-                Are you sure you want to delete this item?
-                <v-layout pt3>
-                    <v-flex v-for="(key, value) in deletedItem">
-                        <div>
-                            {{value}} : {{key}}
-                        </div>
+                Are you sure you want to delete this items?
+                <v-container grid-list-md v-if="deletedItems.length" pt3>
+                    <v-layout v-for="item in deletedItems">
+                        <v-flex v-for="(value, key) in item">
+                                {{key}}: {{value}}
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+                <v-layout v-else pt3>
+                    <v-flex v-for="(key, value) in deletedItems">
+                            {{value}}: {{key}}
                     </v-flex>
                 </v-layout>
                 <v-layout wrap>

@@ -12,7 +12,7 @@
     },
     {
       "id": 23,
-      "name": "Poezii II",
+      "name": "Poezii III",
       "author": "Mihai Eminescu"
     },
     {
@@ -53,103 +53,121 @@
   ],
   "authors": [
     {
-      "id": 10,
+      "id": 52,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
     },
     {
-      "id": 11,
-      "name": "Ion Creanga",
-      "age": 85,
-      "phone": "+37311111114"
-    },
-    {
-      "id": 12,
-      "name": "Ion Creanga",
-      "age": 85,
-      "phone": "+37311111115"
-    },
-    {
-      "id": 13,
-      "name": "Ion Creanga",
-      "age": 85,
-      "phone": "+37311111116"
-    },
-    {
-      "id": 14,
-      "name": "Ion Creanga",
-      "age": 85,
-      "phone": "+37311111114"
-    },
-    {
-      "id": 15,
+      "id": 53,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
     },
     {
-      "id": 16,
+      "id": 54,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
     },
     {
-      "id": 17,
+      "id": 55,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
     },
     {
-      "id": 19,
+      "id": 56,
       "name": "Ion Creanga",
       "age": 85,
-      "phone": "+37311111110"
+      "phone": "+37311111113"
     },
     {
-      "id": 20,
+      "id": 57,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 60,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111117"
     },
     {
-      "id": 21,
+      "id": 61,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
     },
     {
-      "id": 22,
+      "id": 62,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
     },
     {
-      "id": 23,
+      "id": 63,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
     },
     {
-      "id": 24,
+      "id": 74,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
     },
     {
-      "id": 25,
+      "id": 124,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
     },
     {
-      "id": 26,
+      "id": 323,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
     },
     {
-      "id": 27,
+      "id": 324,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 325,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 333,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 327,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 424,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 444,
+      "name": "Ion Creanga",
+      "age": 85,
+      "phone": "+37311111113"
+    },
+    {
+      "id": 426,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"
