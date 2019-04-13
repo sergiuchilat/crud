@@ -93,7 +93,7 @@ export default {
       <v-spacer></v-spacer>
      <v-icon
              large
-             class="mr-3 animation"
+             class="mr-3"
              @click="$router.push(`/${moduleName}/create`)"
      >
        add_circle_outline
@@ -134,7 +134,7 @@ export default {
             class="elevation-1"
     >
       <template v-slot:items="props">
-        <tr :active="props.selected" @click="props.selected = !props.selected">
+        <tr>
             <td>
                 <v-checkbox
                         v-model="props.selected"
