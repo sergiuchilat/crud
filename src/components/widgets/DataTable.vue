@@ -115,7 +115,7 @@ export default {
                :closeModal = "close"
        />
       </v-dialog>
-      <v-dialog v-model="editModal" fullscreen hide-overlay transition="dialog-bottom-transition">
+      <v-dialog v-model="editModal" fullscreen hide-overlay transition="fade">
         <ActionUpdate
                 v-if="editModal"
                 :editItem = "editItem.id"

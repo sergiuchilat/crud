@@ -4,6 +4,11 @@
 export default {
   name: 'ActionUpdate',
   props: ['editItem', 'moduleName', 'closeModal'],
+  data () {
+    return {
+      shadowData: []
+    }
+  },
   computed: {
     updatedItem () {
       return this.$store.getters.getUpdatedItem
@@ -22,8 +27,9 @@ export default {
       // (params.breadcrumb) && this.loadBreadcrumbs()
     },
     loadData (params) {
-      this.$store.dispatch('getItemForUpdate', params)
+      this.$store.dispatch('fetchItem', params)
         .then(() => {
+          this.makeShadow()
         })
         .catch(() => {
           this.$store.dispatch('setAlertStatus', {
@@ -32,9 +38,27 @@ export default {
           })
         })
     },
+    makeShadow () {
+      this.shadowData = Object.assign({}, this.$store.getters.getUpdatedItem)
+    },
+    prepareData () {
+      let changedFields = {}
+      // changedFields.id = this.updatedItem.id
+      for (let key in this.updatedItem) {
+        if (
+          this.updatedItem.hasOwnProperty(key) &&
+          this.shadowData.hasOwnProperty(key) &&
+          this.updatedItem[key] !== this.shadowData[key]
+        ) {
+          changedFields[key] = this.updatedItem[key]
+        }
+      }
+      return changedFields
+    },
     Save () {
       this.$store.dispatch('patchUpdateItems', {
-        data: this.updatedItem,
+        data: this.prepareData(),
+        id: this.updatedItem.id,
         moduleName: this.moduleName
       })
         .then(() => {

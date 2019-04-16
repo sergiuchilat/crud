@@ -14,54 +14,43 @@ export default {
     setUpdatedItem (state, object) {
       state.updatedItem = object
     },
-    spliceUpdatedItem (state, object) {
+    updateSelectedItem (state, object) {
       let updatedList = store.state.CrudActions.ActionFetch.actionData
-      let updatedIndex = updatedList.findIndex(i => i.id === object.id)
-      updatedList.splice(updatedIndex, 1, object)
+      for (let key in object.data) {
+        if (object.data.hasOwnProperty(key)) {
+          updatedList[updatedList.findIndex(i => i.id === object.id)][key] = object.data[key]
+        }
+      }
     }
   },
   actions: {
-    getItemForUpdate (context, payload) {
-      store.dispatch('showLoader')
+    fetchItem (context, payload) {
+      store.dispatch('showLoader').then().then()
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/' + payload.moduleName + '/' + payload.id)
           .then((res) => {
-            store.dispatch('hideLoader')
+            store.dispatch('hideLoader').then()
             context.commit('setUpdatedItem', res.data)
             resolve(res)
           })
           .catch((err) => {
-            store.dispatch('hideLoader')
+            store.dispatch('hideLoader').then()
             context.commit('setUpdatedItem', {})
             reject(err)
           })
       })
     },
-    getUpdatedItem (context, payload) {
+    patchUpdateItems (context, payload) {
+      store.dispatch('showLoader').then()
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/' + payload.moduleName + '/' + payload.data.id)
-          .then((res) => {
-            context.commit('spliceUpdatedItem', res.data)
+        axios.patch(`http://localhost:3000/${payload.moduleName}/${payload.id}`, payload.data)
+          .then(res => {
+            context.commit('updateSelectedItem', payload)
+            store.dispatch('hideLoader').then()
             resolve(res)
           })
-          .catch((err) => {
-            reject(err)
-          })
-      })
-    },
-    patchUpdateItems (context, payload) {
-      store.dispatch('showLoader')
-      return new Promise((resolve, reject) => {
-        axios.patch(`http://localhost:3000/${payload.moduleName}/${payload.data.id}`, payload.data)
-          .then(res => {
-            store.dispatch('getUpdatedItem', payload)
-              .then(() => {
-                store.dispatch('hideLoader')
-                resolve(res)
-              })
-          })
           .catch(err => {
-            store.dispatch('hideLoader')
+            store.dispatch('hideLoader').then()
             reject(err)
           })
       })
