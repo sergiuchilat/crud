@@ -17,8 +17,10 @@ export default {
       totalItems: 0
     },
     totalVisiblePage: 6,
-    deleteModal: false,
-    editModal: false,
+    modalShowed: {
+      delete: false,
+      edit: false
+    },
     headers: [{
       text: 'Actions',
       value: 'id',
@@ -26,11 +28,11 @@ export default {
       sortable: false
     }],
     deletedItem: {},
-    editItem: {},
-    selected: []
+    editedItem: {},
+    selectedItems: []
   }),
   watch: {
-    deleteModal (val) {
+    modalShowed (val) {
       val || this.close()
     },
     items () {
@@ -68,19 +70,21 @@ export default {
       }
     },
     getElementForUpdate (item) {
-      this.editModal = true
-      this.editItem = item
+      this.modalShowed.edit = true
+      this.editedItem = item
     },
     getElementForDelete (item) {
-      this.deleteModal = true
+      this.modalShowed.delete = true
       this.deletedItem = item
     },
     close () {
-      this.deleteModal = false
-      this.editModal = false
+      this.modalShowed = {
+        delete: false,
+        edit: false
+      }
       setTimeout(() => {
         this.deletedItem = {}
-        this.editItem = {}
+        this.editedItem = {}
       }, 300)
     }
   }
@@ -100,32 +104,32 @@ export default {
      </v-icon>
       <transition name="slide-fade">
       <v-icon
-              v-if="selected.length"
+              v-if="selectedItems.length"
               large
-              @click="getElementForDelete(selected)"
+              @click="getElementForDelete(selectedItems)"
       >
         delete_outline
       </v-icon>
       </transition>
-      <v-dialog v-model="deleteModal" max-width="500px">
+      <v-dialog v-model="modalShowed.delete" max-width="500px">
        <ActionDelete
-               v-if="deleteModal"
+               v-if="modalShowed.delete"
                :deletedItems = "deletedItem"
                :moduleName = "moduleName"
                :closeModal = "close"
        />
       </v-dialog>
-      <v-dialog v-model="editModal" fullscreen hide-overlay transition="fade">
+      <v-dialog v-model="modalShowed.edit" fullscreen hide-overlay transition="fade">
         <ActionUpdate
-                v-if="editModal"
-                :editItem = "editItem.id"
+                v-if="modalShowed.edit"
+                :editedItem = "editedItem.id"
                 :moduleName = "moduleName"
                 :closeModal = "close"
         />
       </v-dialog>
     </v-toolbar>
     <v-data-table
-            v-model="selected"
+            v-model="selectedItems"
             :headers="headers"
             :items="items"
             :pagination.sync="pagination"
@@ -142,7 +146,7 @@ export default {
                         hide-details
                 ></v-checkbox>
             </td>
-            <td v-for="(value) in props.item" class="text-xs-center">{{value}}</td>
+            <td v-for="(value) in props.item" :key="value" class="text-xs-center">{{value}}</td>
             <td class="justify-center layout px-0 ">
                 <v-icon
                         small
@@ -160,16 +164,17 @@ export default {
             </td>
         </tr>
       </template>
-        <template v-slot:footer>
-            <td v-if="showPagination" :colspan="headers.length + 1" class="pt-3 pb-3">
-                <v-pagination
-                        :total-visible="totalVisiblePage"
-                        v-model="pagination.page"
-                        :length="pages"
-                >
-                </v-pagination>
-            </td>
-        </tr>
+        <template v-slot:footer="">
+            <tr>
+                <td v-if="showPagination" :colspan="headers.length + 1" class="pt-3 pb-3">
+                    <v-pagination
+                            :total-visible="totalVisiblePage"
+                            v-model="pagination.page"
+                            :length="pages"
+                    >
+                    </v-pagination>
+                </td>
+            </tr>
       </template>
     </v-data-table>
   </div>

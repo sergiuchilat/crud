@@ -53,58 +53,10 @@
   ],
   "authors": [
     {
-      "id": 52,
-      "name": "Mihai Eminescu",
-      "age": "856",
-      "phone": "+3739999999"
-    },
-    {
       "id": 53,
       "name": "Ion Creanga",
       "age": "85168",
       "phone": "+37377777779"
-    },
-    {
-      "id": 54,
-      "name": "Vasile Alexandri",
-      "age": 85,
-      "phone": "+373111111138"
-    },
-    {
-      "id": 55,
-      "name": "Ion Creanga",
-      "age": "11",
-      "phone": "+1111111111"
-    },
-    {
-      "id": 56,
-      "name": "Ion Creanga",
-      "age": 85,
-      "phone": "+37311111113"
-    },
-    {
-      "id": 57,
-      "name": "Ion Creanga",
-      "age": 85,
-      "phone": "+37311111113"
-    },
-    {
-      "id": 60,
-      "name": "Ion Creanga",
-      "age": "333",
-      "phone": "+33333"
-    },
-    {
-      "id": 61,
-      "name": "Ion Creanga",
-      "age": "11111",
-      "phone": "+4444444"
-    },
-    {
-      "id": 62,
-      "name": "Ion Creanga",
-      "age": 85,
-      "phone": "+37311111113"
     },
     {
       "id": 63,
@@ -132,18 +84,6 @@
     },
     {
       "id": 324,
-      "name": "Ion Creanga",
-      "age": 85,
-      "phone": "+37311111113"
-    },
-    {
-      "id": 325,
-      "name": "Ion Creanga",
-      "age": 85,
-      "phone": "+37311111113"
-    },
-    {
-      "id": 333,
       "name": "Ion Creanga",
       "age": 85,
       "phone": "+37311111113"

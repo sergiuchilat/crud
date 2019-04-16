@@ -12,25 +12,23 @@ export default {
       } else {
         deletedItem = this.deletedItems
       }
-      deletedItem.map((value, key) => {
-        this.$store.dispatch('deleteItems', {
-          data: value.id,
-          moduleName: this.moduleName
-        })
-          .then(() => {
-            this.$store.dispatch('setAlertStatus', {
-              label: 'success.saved',
-              class: 'success'
-            })
-            this.closeModal()
-          })
-          .catch(() => {
-            this.$store.dispatch('setAlertStatus', {
-              label: 'errors.server',
-              class: 'error'
-            })
-          })
+      this.$store.dispatch('deleteItems', {
+        deletedItem,
+        moduleName: this.moduleName
       })
+        .then(() => {
+          this.$store.dispatch('setAlertStatus', {
+            label: 'success.saved',
+            class: 'success'
+          })
+          this.closeModal()
+        })
+        .catch(() => {
+          this.$store.dispatch('setAlertStatus', {
+            label: 'errors.server',
+            class: 'error'
+          })
+        })
     }
   }
 }

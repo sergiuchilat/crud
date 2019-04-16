@@ -1,14 +1,12 @@
 <script>
 import { maxLength, minLength, numeric, required } from 'vuelidate/lib/validators'
 import PrototypeAction from '@/components/prototype/ActionCreate'
-
-const isPhone = value => value.match('^[0-9 +]*$') !== null
+import { isPhone } from '@/plugins/custom_validation/phone'
 
 export default {
   extends: PrototypeAction,
   data () {
     return {
-      moduleName: 'authors',
       form: {
         name: '',
         age: '',
@@ -18,7 +16,8 @@ export default {
         phone: [
           () => this.$v.form.phone.required || 'This field is required',
           () => this.$v.form.phone.minLength || 'Min length 11 characters',
-          () => this.$v.form.phone.maxLength || 'Max length 11 characters'
+          () => this.$v.form.phone.maxLength || 'Max length 11 characters',
+          () => this.$v.form.phone.isPhone || 'Invalid phone number'
         ],
         age: [
           () => this.$v.form.age.required || 'This field is required',

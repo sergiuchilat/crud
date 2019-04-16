@@ -3,10 +3,11 @@
 
 export default {
   name: 'ActionUpdate',
-  props: ['editItem', 'moduleName', 'closeModal'],
+  props: ['editedItem', 'moduleName', 'closeModal'],
   data () {
     return {
-      shadowData: []
+      oldValues: [],
+      showForm: false
     }
   },
   computed: {
@@ -17,9 +18,10 @@ export default {
   mounted () {
     this.initAction({
       moduleName: this.moduleName,
-      id: this.editItem,
+      id: this.editedItem,
       breadcrumb: true
     })
+    console.log('mounted')
   },
   methods: {
     initAction (params) {
@@ -29,17 +31,19 @@ export default {
     loadData (params) {
       this.$store.dispatch('fetchItem', params)
         .then(() => {
-          this.makeShadow()
+          this.saveOldValues()
+          this.showForm = true
         })
         .catch(() => {
+          this.showForm = false
           this.$store.dispatch('setAlertStatus', {
             label: 'errors.server',
             class: 'error'
           })
         })
     },
-    makeShadow () {
-      this.shadowData = Object.assign({}, this.$store.getters.getUpdatedItem)
+    saveOldValues () {
+      this.oldValues = Object.assign({}, this.updatedItem)
     },
     prepareData () {
       let changedFields = {}
@@ -47,8 +51,8 @@ export default {
       for (let key in this.updatedItem) {
         if (
           this.updatedItem.hasOwnProperty(key) &&
-          this.shadowData.hasOwnProperty(key) &&
-          this.updatedItem[key] !== this.shadowData[key]
+          this.oldValues.hasOwnProperty(key) &&
+          this.updatedItem[key] !== this.oldValues[key]
         ) {
           changedFields[key] = this.updatedItem[key]
         }
@@ -91,7 +95,7 @@ export default {
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
-          <v-layout class="pt-5" justify-center align-center>
+          <v-layout class="pt-5" justify-center align-center v-if="showForm">
             <v-flex xs3>
               <v-flex v-for="(value, key) in updatedItem">
                 <v-flex v-if="key !== 'id'">
