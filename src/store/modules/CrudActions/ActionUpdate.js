@@ -27,7 +27,7 @@ export default {
     fetchItem (context, payload) {
       store.dispatch('showLoader').then().then()
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/' + payload.moduleName + '/' + payload.id)
+        axios.get(process.env.VUE_APP_API_SERVER_URL + payload.moduleName + '/' + payload.id)
           .then((res) => {
             store.dispatch('hideLoader').then()
             context.commit('setUpdatedItem', res.data)
@@ -43,7 +43,7 @@ export default {
     patchUpdateItems (context, payload) {
       store.dispatch('showLoader').then()
       return new Promise((resolve, reject) => {
-        axios.patch(`http://localhost:3000/${payload.moduleName}/${payload.id}`, payload.data)
+        axios.patch(`${process.env.VUE_APP_API_SERVER_URL}${payload.moduleName}/${payload.id}`, payload.data)
           .then(res => {
             context.commit('updateSelectedItem', payload)
             store.dispatch('hideLoader').then()

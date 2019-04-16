@@ -19,7 +19,7 @@ export default {
     fetchData (context, module) {
       store.dispatch('showLoader')
       context.commit('setData', { 'data': [] })
-      axios.get('http://localhost:3000/' + module)
+      axios.get(process.env.VUE_APP_API_SERVER_URL + module)
         .then(res => {
           const data = res.data
           store.dispatch('hideLoader')
